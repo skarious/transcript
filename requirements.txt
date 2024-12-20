@@ -1,0 +1,8 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.0+cpu
+torchaudio==2.1.0+cpu
+numpy==1.24.3
+openai-whisper==20231117
+ffmpeg-python==0.2.0
+setuptools==68.0.0
+wheel==0.40.0

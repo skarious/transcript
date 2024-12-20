@@ -1,0 +1,26 @@
+{
+  "name": "audio-transcription-api",
+  "version": "1.0.0",
+  "description": "API for audio transcription supporting binary files and URLs using Whisper",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "multer": "^1.4.5-lts.1",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "express-validator": "^7.0.1",
+    "winston": "^3.11.0",
+    "ffmpeg-static": "^5.2.0",
+    "node-record-lpcm16": "^1.0.1",
+    "python-shell": "^5.0.0",
+    "tmp-promise": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
