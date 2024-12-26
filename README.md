@@ -78,6 +78,45 @@ Variables de entorno disponibles:
 PORT=3000
 NODE_ENV=production
 LOG_LEVEL=info
+DEFAULT_LANGUAGE=es  # Idioma por defecto para transcripciones
+```
+
+### Configuración de Idiomas
+
+La API soporta transcripción en múltiples idiomas:
+
+- `es`: Español (por defecto)
+- `en`: Inglés
+- `pt`: Portugués
+
+Puedes configurar el idioma de dos formas:
+
+1. **Global (por defecto)**: Configura la variable de entorno `DEFAULT_LANGUAGE` en tu archivo `.env`
+2. **Por petición**: Especifica el idioma en el cuerpo de la petición
+
+### Ejemplos de Uso de Idiomas
+
+#### Transcribir desde URL con idioma específico
+
+```bash
+POST /api/transcription/url
+Content-Type: application/json
+
+{
+    "url": "https://ejemplo.com/audio.mp3",
+    "language": "en"  # Opcional: sobrescribe DEFAULT_LANGUAGE
+}
+```
+
+#### Transcribir archivo con idioma específico
+
+```bash
+POST /api/transcription/file
+Content-Type: multipart/form-data
+
+Form data:
+- data: [archivo de audio]
+- language: en  # Opcional: sobrescribe DEFAULT_LANGUAGE
 ```
 
 ## Integración con n8n
@@ -100,6 +139,7 @@ LOG_LEVEL=info
 ```json
 {
     "text": "Texto transcrito del audio",
+    "language": "es",
     "success": true
 }
 ```
@@ -108,6 +148,13 @@ LOG_LEVEL=info
 ```json
 {
     "error": "Descripción del error"
+}
+```
+
+### Errores Específicos de Idioma
+```json
+{
+    "error": "Idioma no soportado. Idiomas disponibles: es, en, pt"
 }
 ```
 

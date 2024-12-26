@@ -19,18 +19,15 @@ const validateLanguage = (language) => {
 };
 
 const transcribeAudio = async (audioPath, language = null) => {
-    validateLanguage(language);
+    // Usar el idioma proporcionado o el valor por defecto de las variables de entorno
+    const selectedLanguage = language || process.env.DEFAULT_LANGUAGE || 'es';
+    validateLanguage(selectedLanguage);
 
     return new Promise((resolve, reject) => {
         const pythonScript = path.join(__dirname, '..', 'whisper_transcribe.py');
-        const args = [audioPath];
+        const args = [audioPath, selectedLanguage];
         
-        if (language) {
-            args.push(language);
-            logger.info(`🌍 Usando idioma específico: ${SUPPORTED_LANGUAGES[language]}`);
-        } else {
-            logger.info('🌍 Usando detección automática de idioma');
-        }
+        logger.info(`🌍 Usando idioma: ${SUPPORTED_LANGUAGES[selectedLanguage]}`);
 
         const pythonProcess = spawn('python', [pythonScript, ...args]);
         let outputData = '';

@@ -13,7 +13,7 @@ def transcribe_audio(file_path, language='es'):
         # Return only the text
         print(json.dumps({
             'text': result['text'],
-            'language': 'es'
+            'language': language
         }))
         
     except Exception as e:
@@ -25,4 +25,6 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(json.dumps({'error': 'No file path provided'}))
     else:
-        transcribe_audio(sys.argv[1])
+        # Get language from command line arguments if provided, default to 'es'
+        language = sys.argv[2] if len(sys.argv) > 2 else 'es'
+        transcribe_audio(sys.argv[1], language)
