@@ -5,9 +5,11 @@ class TranscriptionController {
     async transcribeFromUrl(req, res) {
         try {
             const { url } = req.body;
-            logger.info(`📝 Iniciando transcripción desde URL: ${url}`);
+            const { language } = req.query;
+
+            logger.info(`📝 Iniciando transcripción desde URL: ${url}${language ? ` en ${language}` : ''}`);
             
-            const result = await transcriptionService.transcribeFromUrl(url);
+            const result = await transcriptionService.transcribeFromUrl(url, language);
             
             logger.info(`✅ Transcripción completada exitosamente`);
             res.json(result);
@@ -24,8 +26,10 @@ class TranscriptionController {
                 return res.status(400).json({ error: 'No file uploaded' });
             }
 
-            logger.info(`📝 Iniciando transcripción de archivo: ${req.file.originalname}`);
-            const result = await transcriptionService.transcribeFromBuffer(req.file.buffer);
+            const { language } = req.query;
+
+            logger.info(`📝 Iniciando transcripción de archivo: ${req.file.originalname}${language ? ` en ${language}` : ''}`);
+            const result = await transcriptionService.transcribeFromBuffer(req.file.buffer, language);
             
             logger.info(`✅ Transcripción completada exitosamente`);
             res.json(result);
