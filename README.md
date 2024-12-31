@@ -36,7 +36,7 @@ O usando docker-compose:
 version: '3.8'
 services:
   api:
-    image: skarious/audio-transcription-api:0.0.1
+    image: skarious/audio-transcription-api:latest
     ports:
       - "3000:3000"
     volumes:
